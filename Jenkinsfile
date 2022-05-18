@@ -1,4 +1,7 @@
 pipeline {
+  agent any
+  
+  stages {
     
     stage("Git Clone"){
  
@@ -37,5 +40,5 @@ pipeline {
                     enableConfigSubstitution: true
                     )               
         }
- 
+  }
 }
