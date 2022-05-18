@@ -31,13 +31,32 @@ pipeline {
         sh 'docker push  nirajvishwakarma/jhooq-docker-demo:jhooq-docker-demo'
     }
     
-     stage ('K8S Deploy') {
-       
-                kubernetesDeploy(
-                    configs: 'k8s-spring-boot-deployment.yml',
-                    kubeconfigId: 'k8s',
-                    enableConfigSubstitution: true
-                    )               
+    
+    stage('Deliver for development') {
+        when {
+            branch 'development' 
         }
+        steps {
+            input message: 'Finished using the web site? (Click "Proceed" to continue)'
+        }
+    }
+    stage('Deploy for production') {
+        when {
+            branch 'production'  
+        }
+        steps {
+            input message: 'Finished using the web site? (Click "Proceed" to continue)'
+        }
+    }
+    
+    
+ #    stage ('K8S Deploy') {
+ #      
+ #               kubernetesDeploy(
+ #                   configs: 'k8s-spring-boot-deployment.yml',
+ #                   kubeconfigId: 'k8s',
+ #                   enableConfigSubstitution: true
+ #                   )               
+ #       }
   }
 }
