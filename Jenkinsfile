@@ -1,5 +1,6 @@
 pipeline {
-    
+  agent any
+  stages {
     stage("Git Clone"){
  
         git credentialsId: 'GIT_HUB_CREDENTIALS', url: 'https://github.com/nirajvishwakarma/jhook-springboot.git'
@@ -37,5 +38,5 @@ pipeline {
                     enableConfigSubstitution: true
                     )               
         }
- 
+  }
 }
