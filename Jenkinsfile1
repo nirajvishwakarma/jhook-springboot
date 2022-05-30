@@ -4,7 +4,11 @@ def targetK8SCluster= "dev"
 pipeline {
 
 
-  agent any
+    agent any
+    
+    environment {
+      registry = "817141239014.dkr.ecr.us-east-1.amazonaws.com/test-ecr"
+    }
 
     stage ("checkout") {
       steps {
@@ -116,10 +120,6 @@ pipeline {
             echo "Deployment Completed to the ${targetK8SCluster} environment."
         }
     }
-
     
-    
-    
-  }
 
 }
