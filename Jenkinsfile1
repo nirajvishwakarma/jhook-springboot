@@ -99,6 +99,7 @@ pipeline {
                       expression { targetK8SCluster == "dev" }
                     }
                     steps {
+                        sh 'su -'
                         sh 'aws eks --region us-east-1 update-kubeconfig --name WIM-dev'
                         kubernetesDeploy(configs: "k8s-spring-boot-deployment.yml", kubeconfigId: "WIM-dev")
                     }
