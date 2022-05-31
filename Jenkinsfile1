@@ -100,7 +100,7 @@ pipeline {
                     }
                     steps {
                         sh 'aws eks --region us-east-1 update-kubeconfig --name WIM-dev'
-                        kubernetesDeploy(configs: "k8s-spring-boot-deployment.yml", kubeconfigId: "dev")
+                        kubernetesDeploy(configs: "k8s-spring-boot-deployment.yml", kubeconfigId: "WIM-dev")
                     }
                 }
                 stage('deploy to production') {
@@ -109,7 +109,7 @@ pipeline {
                     }
                     steps {
                         sh 'aws eks --region us-east-1 update-kubeconfig --name WIM-prod'
-           	            kubernetesDeploy(configs: "k8s-spring-boot-deployment.yml", kubeconfigId: "prod")
+           	            kubernetesDeploy(configs: "k8s-spring-boot-deployment.yml", kubeconfigId: "WIM-prod")
                     }
                 }
             }
