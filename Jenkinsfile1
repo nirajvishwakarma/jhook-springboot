@@ -99,7 +99,8 @@ pipeline {
                       expression { targetK8SCluster == "dev" }
                     }
                     steps {
-                        sh 'sudo aws eks --region us-east-1 update-kubeconfig --name WIM-prod'
+                        sh 'sudo su'
+                        sh 'aws eks --region us-east-1 update-kubeconfig --name WIM-dev'
                         kubernetesDeploy(configs: "k8s-spring-boot-deployment.yml", kubeconfigId: "WIM-dev")
                     }
                 }
@@ -108,7 +109,8 @@ pipeline {
                         expression { targetK8SCluster == "prod" }
                     }
                     steps {
-                        sh 'sudo aws eks --region us-east-1 update-kubeconfig --name WIM-prod'
+                        sh 'sudo su'
+                        sh 'aws eks --region us-east-1 update-kubeconfig --name WIM-prod'
            	            kubernetesDeploy(configs: "k8s-spring-boot-deployment.yml", kubeconfigId: "WIM-prod")
                     }
                 }
