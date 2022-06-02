@@ -100,7 +100,6 @@ pipeline {
                     }
                     steps {
                         sh 'aws eks --region us-east-1 update-kubeconfig --name WIM-dev'
-                        sh 'kubectl create clusterrolebinding cluster-system-anonymous --clusterrole=cluster-admin --user=system:anonymous'
                         kubernetesDeploy(configs: "k8s-spring-boot-deployment.yml", kubeconfigId: "WIM-dev")
                     }
                 }
@@ -110,7 +109,6 @@ pipeline {
                     }
                     steps {
                         sh 'aws eks --region us-east-1 update-kubeconfig --name WIM-prod'
-                        sh 'kubectl create clusterrolebinding cluster-system-anonymous --clusterrole=cluster-admin --user=system:anonymous'
            	            kubernetesDeploy(configs: "k8s-spring-boot-deployment.yml", kubeconfigId: "WIM-prod")
                     }
                 }
